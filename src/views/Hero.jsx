@@ -1,17 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import styled from "styled-components"
+import { BiMoon, BiSun } from 'react-icons/bi'
+
 import NavLink from "../components/NavLink";
 import { changeTheme } from '../features/theme/themeSlice'
+import { useEffect, useState } from "react";
 
 const Hero = () => {
 
     const dispatch = useDispatch();
-    const {selectedTheme} = useSelector(state => state.theme);
+    const { selectedTheme } = useSelector(state => state.theme);
+
+    const [scroll, setScroll] = useState(false);
+    const handlerScroll = () => {
+        if (window.scrollY > 10) {
+            setScroll(true)
+        } else {
+            setScroll(false)
+        }
+    }
+    window.addEventListener('scroll', handlerScroll);
 
     return (
         <Header name={'home'}>
-            <NavBar>
+            <NavBar $scroll={scroll}>
                 <Left>
                     <Logo>J</Logo>
                     <span>ose Luis</span>
@@ -23,12 +35,26 @@ const Hero = () => {
                 </Nav>
                 <Right>
                     <NavLink to={'contact'} button={true}>Contact Me</NavLink>
-                    <button onClick={() => dispatch(changeTheme(selectedTheme))}>x</button>
+                    <Button
+                        onClick={() => dispatch(changeTheme(selectedTheme))}>
+                        {selectedTheme === 'light' ? <BiSun /> : <BiMoon />}
+                    </Button>
                 </Right>
             </NavBar>
+
+
+
         </Header>
     )
 }
+
+const Button = styled.button`
+    border: none;
+    background: transparent;
+    color: ${({ theme }) => theme.text};
+    cursor: pointer;
+    font-size: 1rem;
+`;
 
 const Right = styled.div`
     display: flex;
@@ -36,13 +62,14 @@ const Right = styled.div`
 `;
 
 const Logo = styled.div`
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background: ${({ theme }) => theme.bgLogo};
     color: ${({ theme }) => theme.textLogo};
     border-radius: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: .2rem;
 
 `;
@@ -50,6 +77,7 @@ const Logo = styled.div`
 const Left = styled.div`
     display: flex;
     align-items: center;
+    gap: .2rem;
 `;
 
 const Nav = styled.div`
@@ -59,16 +87,23 @@ const Nav = styled.div`
 `;
 
 const NavBar = styled.nav`
+    position: fixed;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 1rem 0;
+    background: ${({theme}) => theme.bg};
+    transition: background 1.5s, box-shadow 1.5s;
+    ${props => props.$scroll && `
+        box-shadow: 0 1px 16px ${props.theme.shadow};
+    `}
 `;
 
 const Header = styled.header`
     width: 100%;
-
+    height: 100vh;
 `;
 
 export default Hero

@@ -29,7 +29,10 @@ const Item = styled(Link)`
 
         ${props.$button ?
             `
-            background: 
+            background: ${props.theme.bgLogo};
+            color: ${props.theme.textLogo};
+            padding: .8rem 2rem;
+            border-radius: .8rem;
             `
         :
             `

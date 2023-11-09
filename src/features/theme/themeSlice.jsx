@@ -18,9 +18,6 @@ if(theme === null) {
     }
 }
 
-
-console.log(the)
-
 const initialState = {
     theme: the,
     selectedTheme: sThe
