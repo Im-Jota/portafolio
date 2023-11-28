@@ -41,9 +41,8 @@ const Hero = () => {
                     </Button>
                 </Right>
             </NavBar>
-
-
-
+            <h1>Jose Luis</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse delectus praesentium placeat pariatur quo temporibus ipsam, ullam consequuntur cum laudantium? Mollitia nam cumque, dolor consectetur debitis laborum eum quaerat a?</p>
         </Header>
     )
 }
@@ -94,9 +93,10 @@ const NavBar = styled.nav`
     justify-content: space-around;
     align-items: center;
     padding: 1rem 0;
-    background: ${({theme}) => theme.bg};
-    transition: background 1.5s, box-shadow 1.5s;
+    background: ${({theme}) => theme.bgNav};
+    transition: background 1.5s, box-shadow 1s;
     ${props => props.$scroll && `
+        backdrop-filter: blur(0.09rem);
         box-shadow: 0 1px 16px ${props.theme.shadow};
     `}
 `;
@@ -104,6 +104,10 @@ const NavBar = styled.nav`
 const Header = styled.header`
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default Hero

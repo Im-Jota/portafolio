@@ -1,5 +1,6 @@
 const lightMode = {
     bg: '#dddcdd',
+    bgNav: 'rgba(221, 220, 221, .9)',
     text: 'black',
     bgSecondary: '#dedede',
     icons: '#656465',
@@ -10,6 +11,7 @@ const lightMode = {
 
 const darkMode = {
     bg: '#151315',
+    bgNav: 'rgba(21, 19, 21, .9)',
     text: 'white',
     bgSecondary: '#1f1e1f',
     icons: '#4f4b4f',
